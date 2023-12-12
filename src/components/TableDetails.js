@@ -1,23 +1,30 @@
-import React,{useEffect,useState} from 'react'
-
+import React, { useEffect, useState } from 'react';
 
 const TableDetails = () => {
-  const [emps,setEmps] = useState([])
+  const [emps, setEmps] = useState([]);
+
   const getEmps = async () => {
-    try{
-      const response = await fetch("https://employee-details-backend.vercel.app/display")
-      console.log(response);
+    try {
+      const response = await fetch("https://employee-details-backend.vercel.app/display");
       const jsonData = await response.json();
       setEmps(jsonData);
-      
     } catch (error) {
-      console.error(error.message)
+      console.error(error.message);
     }
   };
 
   useEffect(() => {
+    // Call getEmps initially
     getEmps();
+
+    const intervalId = setInterval(() => {
+      getEmps();
+    }, 1000);
+
+    
+    return () => clearInterval(intervalId);
   }, []);
+
   return (
     <>
       <div className="table">
@@ -43,13 +50,13 @@ const TableDetails = () => {
                 <td>{emp.dob}</td>
                 <td>{emp.address}</td>
                 <td>{emp.email}</td>
-                
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-  </>
- )
-}
-export default TableDetails
+    </>
+  );
+};
+
+export default TableDetails;
