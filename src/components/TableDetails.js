@@ -5,7 +5,7 @@ const TableDetails = () => {
   const [emps,setEmps] = useState([])
   const getEmps = async () => {
     try{
-      const response = await fetch("http://localhost:5000/display")
+      const response = await fetch("https://employee-details-backend.vercel.app/display")
       console.log(response);
       const jsonData = await response.json();
       setEmps(jsonData);

@@ -25,7 +25,7 @@ const InputDetails = () => {
         email:email
       };
 
-      const response = await fetch("http://localhost:5000/create",{
+      const response = await fetch("https://employee-details-backend.vercel.app/create",{
         method:"POST",
         headers:{"Content-Type":"application/json"},
         body: JSON.stringify(formData)
